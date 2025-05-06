@@ -37,4 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/user/{user}/removeadmin', [UserController::class, 'removeadmin'])->name('user.removeadmin');
 });
 
+Route::middleware(['auth', 'admin'])->group(function(){
+    Route::resource('user', UserController::Class)->except(['show']);
+    Route::patch('/user/{user}/makeadmin', [UserController::Class, 'makeadmin'])->name('user.makeadmin');
+    Route::patch('/user/{user}/removeadmin', [UserController::Class, 'removeadmin'])->name('user.removeadmin');
+});
 require __DIR__.'/auth.php';

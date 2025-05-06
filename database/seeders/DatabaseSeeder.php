@@ -29,4 +29,11 @@ class DatabaseSeeder extends Seeder
         User::factory(101)->create(); //100 user
         Todo::factory(500)->create(); //500 todo
     }
+    public function boot(): void
+    {
+        Paginator::useTailwind();
+        Gate::define('admin', function ($user){
+            return $user->is_admin == true;
+        });
+    }
 }
